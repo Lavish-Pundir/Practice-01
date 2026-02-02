@@ -1,11 +1,13 @@
 import express from "express";
 import userController from "../controllers/user.controller.js";
 import authMiddleware from "../middleware/auth.js";
+import validate from "../middleware/validate.js";
+import { signupSchema, loginSchema } from "../validations/user.validation.js";
 
 const router = express.Router();
 
-router.post('/register', userController.registerUser);
-router.post('/login', userController.loginUser);
+router.post('/register', validate(signupSchema), userController.registerUser);
+router.post('/login', validate(loginSchema), userController.loginUser);
 
 router.get('/profile/:id', authMiddleware, userController.getUserProfile);
 
