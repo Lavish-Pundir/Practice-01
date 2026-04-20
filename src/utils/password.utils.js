@@ -12,9 +12,13 @@ export const veryfyPassword = async (password, hashedPassword) => {
 };
 
 export const isPasswordStrong = (password) => {
-    // At least 8 characters, one uppercase letter, one lowercase letter, one number and one special character
     const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return strongPasswordRegex.test(password);
+};
+
+export const isValidGmail = (email) => {
+    const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    return gmailRegex.test(email);
 };
 
 // optional: you can add more utility functions related to password management here

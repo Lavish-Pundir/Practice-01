@@ -1,6 +1,6 @@
 // src/services/userService.js          
 import userRepository from "../repositort/user.repository.js";
-import { hashPassword, veryfyPassword, isPasswordStrong } from "../utils/password.utils.js";
+import { hashPassword, veryfyPassword, isPasswordStrong, isValidGmail } from "../utils/password.utils.js";
 import { generateToken } from "../utils/token.utils.js";
 
 const registerUser = async ({ name, email, password }) => {
@@ -10,6 +10,10 @@ const registerUser = async ({ name, email, password }) => {
 
     if (!isPasswordStrong(password)) {
         throw new Error("Password is not strong enough");
+    }
+
+    if (!isValidGmail(email)) {
+        throw new Error("Invalid Gmail address");
     }
 
     const hashedPassword = await hashPassword(password);

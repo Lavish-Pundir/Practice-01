@@ -18,9 +18,10 @@ export const signupSchema = Joi.object({
 
         email: Joi.string()
             .email({ minDomainSegments: 2 })
+            .pattern(new RegExp(/@gmail\.com$/))
+            .required()
             .lowercase()
             .trim()
-            .required()
             .messages({
                 'any.required': 'Email is required',
                 'string.empty': 'Email cannot be empty',
